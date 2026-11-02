@@ -16,8 +16,8 @@ namespace Clinic_Management_System.Controllers
         {
             var model = new SpecializationIndexViewModel
             {
-                //specializations = _context.specializations.Include(s=>s.doctors).ToList()
-                specializations = _context.specializations.ToList()
+                specializations = _context.specializations.Include(s=>s.doctors).ToList()
+                
             };
             return View(model);
         }
@@ -32,7 +32,7 @@ namespace Clinic_Management_System.Controllers
             if (!ModelState.IsValid)
             {
                 model.specializations= _context.specializations.ToList();
-                return View("index",model);
+                return View("index");//هيخليني في نفس الصفحه ومفيش تخصص هيتضاف
             }
             _context.specializations.Add(model.NewSpecialization);
             _context.SaveChanges();
@@ -93,6 +93,12 @@ namespace Clinic_Management_System.Controllers
             {
                 return NotFound();
 
+            }
+            bool hasDoctors = _context.doctors.Any(doctor => doctor.SpecializationId == id);
+            if (hasDoctors)//معناه انه التخصص ده فيه دكاتره
+            {
+                TempData["Error"] = "لا يمكن حذف التخصص لوجود دكاتره في هذا التخصص";
+                return RedirectToAction("index");
             }
             _context.specializations.Remove(specialization);
             _context.SaveChanges();

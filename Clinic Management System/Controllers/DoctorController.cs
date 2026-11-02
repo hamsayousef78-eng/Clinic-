@@ -1,5 +1,6 @@
 ﻿using Clinic_Management_System.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Clinic_Management_System.Controllers
 {
@@ -15,21 +16,23 @@ namespace Clinic_Management_System.Controllers
             }
             public IActionResult Index()
             {
-                var doctor = _context.doctors.ToList();
+                var doctor = _context.doctors.Include(s => s.specialization).ToList();
                 return View(doctor);
             }
             public IActionResult Create()
             {
-                return View();
+            ViewBag.specialization = _context.specializations.ToList();
+            return View();
             }
             [HttpPost]
             public IActionResult Create(Doctor doctor, IFormFile? imageFile)
             {
+           
 
-                if (!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 {
-
-                    return View(doctor);
+                ViewBag.specialization = _context.specializations.ToList();
+                return View(doctor);
                 }
                 if (imageFile != null && imageFile.Length > 0)
                 {
@@ -57,7 +60,8 @@ namespace Clinic_Management_System.Controllers
             public IActionResult Edit(int id)
             {
 
-                var doctor = _context.doctors.FirstOrDefault(d => d.Id == id);
+            ViewBag.specialization = _context.specializations.ToList();
+            var doctor = _context.doctors.FirstOrDefault(d => d.Id == id);
                 if (doctor != null)
                 {
                     return View(doctor);
@@ -72,8 +76,8 @@ namespace Clinic_Management_System.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-
-                    return View(doctor);
+                ViewBag.specialization = _context.specializations.ToList();
+                return View(doctor);
                 }
                 var existingDoctor = _context.doctors.Find(doctor.Id);
 
@@ -94,7 +98,7 @@ namespace Clinic_Management_System.Controllers
             }
             public IActionResult Delete(int id)
             {
-                var doctor = _context.doctors.FirstOrDefault(d => d.Id == id);
+                var doctor = _context.doctors.Include(d => d.specialization).FirstOrDefault(d => d.Id == id);
 
                 if (doctor != null)
                 {
@@ -106,8 +110,8 @@ namespace Clinic_Management_System.Controllers
             [HttpPost, ActionName("Delete")]
             public IActionResult DeleteConfirmed(int id)
             {
-                var doctor = _context.doctors.Find(id);
-                if (doctor == null)
+                var doctor = _context.doctors.Include(d => d.specialization).FirstOrDefault(d => d.Id == id);
+            if (doctor == null)
                 {
                     return NotFound();
 

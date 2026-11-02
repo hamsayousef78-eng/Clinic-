@@ -1,5 +1,52 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Clinic_Management_System.Models.Doctor
+
+
 @{
+    ViewData["Title"] = "Edit";
 }
+
+<h1 class="h3 fw-bold pb-2 mb-4 border-bottom">إدارة الاطباء</h1>
+
+<div class="row g-4">
+
+    <div class="col-md-8">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-primary text-white fw-bold"> تعديل بيانات طبيب</div>
+            <div class="card-body">
+                <form asp-controller="Doctor" asp-action="Edit" method="post">
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label">اسم الطبيب </label>
+                        <input type="text" asp-for="Name" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Phone" class="form-label">رقم الهاتف </label>
+                        <input type="tel" asp-for="Phone" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="ImageUrl" class="form-label">الصوره </label>
+                        <input asp-for="ImageUrl" name="imageFile" type="file" accept="image/*">
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="SpecializationId" class="form-label">التخصص </label>
+                        <select asp-for="SpecializationId" class="form-control">
+                            <option value="">-- اختار التخصص --</option>
+                            @foreach (var specialization in ViewBag.specialization)
+                            {
+                                <option value="@specialization.Id">@specialization.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="ConsultationFee" class="form-label">سعر الكشف </label>
+                        <input type="text" asp-for="ConsultationFee" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100"> تعديل</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+       
+
