@@ -1,0 +1,76 @@
+﻿@model Clinic_Management_System.ViewModels.SpecializationIndexViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+                <h1 class="h3 fw-bold pb-2 mb-4 border-bottom">إدارة التخصصات الطبية</h1>
+
+                <div class="row g-4">
+                    <!-- فورم إضافة تخصص سريع -->
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-header bg-primary text-white fw-bold">إضافة تخصص جديد</div>
+                            <div class="card-body">
+                                <form asp-controller="Specialization" asp-action="Create" method="post">
+                                    <div class="mb-3">
+                                    <label asp-for="NewSpecialization.Name" class="form-label">اسم التخصص <span class="text-danger">*</span></label>
+                                    <input type="text" asp-for="NewSpecialization.Name" class="form-control" required placeholder="مثال: طب الأطفال">
+                                    </div>
+                                    <div class="mb-3">
+                                    <label asp-for="NewSpecialization.Description" class="form-label">وصف مختصر</label>
+                                    <textarea asp-for="NewSpecialization.Description" class="form-control" rows="3" placeholder="وصف للقسم..."></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100">حفظ التخصص</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- جدول التخصصات -->
+                    <div class="col-md-8">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body p-0">
+                          
+                                <table class="table table-hover align-middle mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>اسم التخصص</th>
+                                            <th>الوصف</th>
+                                            <th>عدد الأطباء</th>
+                                            <th class="text-center">إجراءات</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                     @foreach (var item in Model.specializations)
+                                    {
+                                    <tr>
+                                        <td>
+                                          @item.Id
+                                        </td>
+                                        <td>
+                                                    @item.Name
+                                        </td>
+                                        <td>
+                                                    @item.Description
+                                        </td>
+                                         <td>
+                                                    
+                                        </td>
+                    
+                                        <td>
+                                            <a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil"></i></a>
+                                            <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                      }
+                                      
+                                    </tbody>
+                                </table>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+       

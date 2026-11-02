@@ -1,0 +1,33 @@
+﻿@model Clinic_Management_System.Models.Specialization
+
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1 class="h3 fw-bold pb-2 mb-4 border-bottom">إدارة التخصصات الطبية</h1>
+
+<div class="row g-4">
+   
+    <div class="col-md-8">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-primary text-white fw-bold"> تعديل تخصص</div>
+            <div class="card-body">
+                <form asp-controller="Specialization" asp-action="Edit" method="post">
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label">اسم التخصص <span class="text-danger">*</span></label>
+                        <input type="text" asp-for="Name" class="form-control" >
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Description" class="form-label">وصف مختصر</label>
+                        <textarea asp-for="Description" class="form-control" rows="3" > </textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100"> تعديل</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+       

@@ -8,6 +8,8 @@
         public int ConsultationFee { get; set; }
         public string? ImageUrl { get; set; }
         public int SpecializationId { get; set; }//foreign key
-        public List<Appointment>? appointments { get; set; }
+        //Navigation
+        public Specialization? specialization { get; set; } 
+        //public List<Appointment>? appointments { get; set; }
     }
 }

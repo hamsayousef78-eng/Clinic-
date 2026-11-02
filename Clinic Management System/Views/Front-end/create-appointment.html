@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>عيادتي - حجز كشف جديد</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Cairo', sans-serif; background-color: #f4f6f9; }
+        .sidebar { min-height: 100vh; background-color: #1e293b; color: #fff; }
+        .sidebar .nav-link { color: #cbd5e1; padding: 12px 20px; border-radius: 8px; margin-bottom: 5px; }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active { background-color: #0ea5e9; color: #fff; }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse p-3">
+            <div class="text-center my-3">
+                <i class="bi bi-hospital fs-1 text-info"></i>
+                <h5 class="mt-2 fw-bold">عيادة الشفاء</h5>
+            </div>
+            <hr class="text-secondary">
+            <ul class="nav flex-column">
+                <li class="nav-item"><a class="nav-link" href="index.html"><i class="bi bi-speedometer2 me-2"></i> لوحة الاستقبال</a></li>
+                <li class="nav-item"><a class="nav-link active" href="create-appointment.html"><i class="bi bi-calendar-plus me-2"></i> حجز كشف جديد</a></li>
+                <li class="nav-item"><a class="nav-link" href="doctors.html"><i class="bi bi-person-badge me-2"></i> الأطباء</a></li>
+                <li class="nav-item"><a class="nav-link" href="specializations.html"><i class="bi bi-grid me-2"></i> التخصصات</a></li>
+                <li class="nav-item"><a class="nav-link" href="patients.html"><i class="bi bi-people me-2"></i> سجل المرضى</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+            <div class="d-flex justify-content-between align-items-center pb-2 mb-4 border-bottom">
+                <h1 class="h3 fw-bold">تسجيل حجز كشف جديد</h1>
+                <a href="index.html" class="btn btn-outline-secondary"><i class="bi bi-arrow-right me-1"></i> عودة للاستقبال</a>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-primary text-white py-3">
+                            <h6 class="mb-0 fw-bold"><i class="bi bi-File-earmark-medical me-2"></i> بيانات الحجز (CreateAppointmentViewModel)</h6>
+                        </div>
+                        <div class="card-body p-4">
+                            <!-- Form Starts Here -->
+                            <form action="index.html" method="post">
+                                <!-- Validation Summary Placeholder -->
+                                <div class="alert alert-danger d-none" role="alert">
+                                    يرجى مراجعة الأخطاء التالية: عذراً، الطبيب لديه حجز آخر في نفس الموعد.
+                                </div>
+
+                                <div class="row g-3">
+                                    <!-- اختيار المريض -->
+                                    <div class="col-md-12">
+                                        <div class="d-flex justify-content-between">
+                                            <label class="form-label fw-semibold">اختر المريض <span class="text-danger">*</span></label>
+                                            <a href="patients.html" class="small text-decoration-none">+ تسجيل مريض جديد أولاً</a>
+                                        </div>
+                                        <select name="PatientId" class="form-select" required>
+                                            <option value="">-- ابحث واختر المريض --</option>
+                                            <option value="1">محمود عبد العزيز (01012345678)</option>
+                                            <option value="2">منى السيد (01122334455)</option>
+                                        </select>
+                                        <span class="text-danger small"></span> <!-- asp-validation-for -->
+                                    </div>
+
+                                    <!-- اختيار التخصص (للفلترة) -->
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">التخصص الطبي <span class="text-danger">*</span></label>
+                                        <select id="SpecializationSelect" name="SpecializationId" class="form-select" required>
+                                            <option value="">-- اختر التخصص --</option>
+                                            <option value="1">باطنة وجهاز هضمي</option>
+                                            <option value="2">طب وجراحة الأسنان</option>
+                                            <option value="3">عظام ومفاصل</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- اختيار الطبيب -->
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">الطبيب المعالج <span class="text-danger">*</span></label>
+                                        <select id="DoctorSelect" name="DoctorId" class="form-select" required>
+                                            <option value="">-- اختر الطبيب --</option>
+                                            <option value="1">د. أحمد محمود - (الكشف: 300 ج.م)</option>
+                                            <option value="2">د. سارة نبيل - (الكشف: 250 ج.م)</option>
+                                        </select>
+                                        <span class="text-danger small"></span>
+                                    </div>
+
+                                    <!-- تاريخ ووقت الكشف -->
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">تاريخ الكشف <span class="text-danger">*</span></label>
+                                        <input type="date" name="AppointmentDate" class="form-control" required>
+                                        <span class="text-danger small"></span>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">وقت الكشف <span class="text-danger">*</span></label>
+                                        <input type="time" name="AppointmentTime" class="form-control" required>
+                                        <span class="text-danger small"></span>
+                                    </div>
+
+                                    <!-- ملاحظات مبدئية (الشكوى) -->
+                                    <div class="col-12">
+                                        <label class="form-label fw-semibold">الشكوى المبدئية / ملاحظات الاستقبال</label>
+                                        <textarea name="Notes" class="form-control" rows="3" placeholder="مثال: المريض يعاني من ألم حاد منذ يومين..."></textarea>
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <div class="col-12 d-flex justify-content-end gap-2">
+                                        <a href="index.html" class="btn btn-light border px-4">إلغاء</a>
+                                        <button type="submit" class="btn btn-primary px-5 fw-bold">
+                                            <i class="bi bi-check2-circle me-1"></i> تأكيد الحجز
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+</body>
+</html>

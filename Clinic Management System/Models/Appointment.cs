@@ -14,7 +14,11 @@
         }
         public Status AppointmentStatus { get; set; }
         public int DoctorId { get; set; }//foreign key
+        //Navigation
+        public Doctor? doctor { get; set; } 
         public int PatientId { get; set; }//foreign key
+        //Navigation
+        public Patient? patient { get; set; } 
 
     }
 }

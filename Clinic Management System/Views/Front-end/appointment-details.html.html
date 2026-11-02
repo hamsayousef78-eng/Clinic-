@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>عيادتي - تفاصيل الكشف والروشتة</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Cairo', sans-serif; background-color: #f4f6f9; }
+        .sidebar { min-height: 100vh; background-color: #1e293b; color: #fff; }
+        .sidebar .nav-link { color: #cbd5e1; padding: 12px 20px; border-radius: 8px; margin-bottom: 5px; }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active { background-color: #0ea5e9; color: #fff; }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse p-3">
+            <div class="text-center my-3">
+                <i class="bi bi-hospital fs-1 text-info"></i>
+                <h5 class="mt-2 fw-bold">عيادة الشفاء</h5>
+            </div>
+            <hr class="text-secondary">
+            <ul class="nav flex-column">
+                <li class="nav-item"><a class="nav-link active" href="index.html"><i class="bi bi-speedometer2 me-2"></i> لوحة الاستقبال</a></li>
+                <li class="nav-item"><a class="nav-link" href="create-appointment.html"><i class="bi bi-calendar-plus me-2"></i> حجز كشف جديد</a></li>
+                <li class="nav-item"><a class="nav-link" href="doctors.html"><i class="bi bi-person-badge me-2"></i> الأطباء</a></li>
+                <li class="nav-item"><a class="nav-link" href="specializations.html"><i class="bi bi-grid me-2"></i> التخصصات</a></li>
+                <li class="nav-item"><a class="nav-link" href="patients.html"><i class="bi bi-people me-2"></i> سجل المرضى</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+            <div class="d-flex justify-content-between align-items-center pb-2 mb-4 border-bottom">
+                <div>
+                    <h1 class="h3 fw-bold mb-0">إدارة الكشف الطبي #101</h1>
+                    <span class="text-muted small">تاريخ الحجز: 2026-10-31 | الساعة: 05:30 م</span>
+                </div>
+                <a href="index.html" class="btn btn-outline-secondary"><i class="bi bi-arrow-right me-1"></i> عودة</a>
+            </div>
+
+            <div class="row g-4">
+                <!-- كارت بيانات المريض والطبيب -->
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm mb-3">
+                        <div class="card-header bg-dark text-white fw-bold">بيانات المريض</div>
+                        <div class="card-body">
+                            <h5 class="fw-bold text-primary">محمود عبد العزيز</h5>
+                            <p class="mb-1"><strong>السن:</strong> 34 سنة</p>
+                            <p class="mb-1"><strong>النوع:</strong> ذكر</p>
+                            <p class="mb-1"><strong>الهاتف:</strong> 01012345678</p>
+                            <hr>
+                            <a href="patient-profile.html" class="btn btn-sm btn-outline-primary w-100">عرض التاريخ المرضي الكامل</a>
+                        </div>
+                    </div>
+
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-secondary text-white fw-bold">بيانات الطبيب والتكلفة</div>
+                        <div class="card-body">
+                            <p class="mb-1"><strong>الطبيب:</strong> د. أحمد محمود</p>
+                            <p class="mb-1"><strong>التخصص:</strong> باطنة وجهاز هضمي</p>
+                            <p class="mb-0"><strong>قيمة الكشف:</strong> <span class="badge bg-success fs-6">300 ج.م</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- فورم كتابة التشخيص والروشتة وتحديث الحالة -->
+                <div class="col-md-8">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0 fw-bold"><i class="bi bi-journal-medical me-2 text-primary"></i> التشخيص الطبي والروشتة</h6>
+                            <span class="badge bg-warning text-dark">الحالة الحالية: قيد الانتظار</span>
+                        </div>
+                        <div class="card-body p-4">
+                            <form action="index.html" method="post">
+                                <input type="hidden" name="AppointmentId" value="101" />
+
+                                <div class="mb-3">
+                                    <label class="form-label fw-semibold">تحديث حالة الكشف (Status Enum)</label>
+                                    <select name="Status" class="form-select">
+                                        <option value="1" selected>قيد الانتظار (Pending)</option>
+                                        <option value="2">تم الكشف بنجاح (Completed)</option>
+                                        <option value="3">إلغاء الكشف (Cancelled)</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="form-label fw-semibold">التشخيص والأدوية الموصوفة (Diagnosis & Prescription)</label>
+                                    <textarea name="Diagnosis" class="form-control" rows="6" placeholder="اكتب التشخيص الطبي والأدوية والجرعات هنا..."></textarea>
+                                </div>
+
+                                <div class="d-flex justify-content-end gap-2">
+                                    <button type="submit" class="btn btn-success px-4 fw-bold">
+                                        <i class="bi bi-save me-1"></i> حفظ التشخيص وتحديث الحالة
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+</body>
+</html>

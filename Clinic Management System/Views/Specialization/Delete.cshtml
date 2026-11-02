@@ -1,0 +1,34 @@
+﻿@model Clinic_Management_System.Models.Specialization
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1 class="h3 fw-bold pb-2 mb-4 border-bottom">إدارة التخصصات الطبية</h1>
+
+<div class="row g-4">
+
+    <div class="col-md-8">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-primary text-white fw-bold"> حذف تخصص</div>
+            <div class="card-body">
+                <div class="mb-3">
+                   اسم التخصص
+                    <span>@Model.Name</span>
+                </div>
+                <div class="mb-3">
+                   وصف التخصص
+                    <span>@Model.Description</span>
+                </div>
+               
+                <form asp-controller="Specialization" asp-action="Delete" method="post">
+                    
+                    <button type="submit" class="btn btn-primary w-100"> حذف</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+       
