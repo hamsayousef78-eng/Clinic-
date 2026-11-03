@@ -35,12 +35,17 @@
                     @foreach (var item in Model)
                 {
                     <tr>
-                        <td></td>
+                        <td><img src="~/images/doctors/@item.ImageUrl" alt="@item.ImageUrl"
+                                 width="60"
+                                 height="60"
+                                 class="rounded-circle"
+                                 style="object-fit: cover;" />
+                        </td>
                         <td class="fw-bold"> @item.Name</td>
                         <td><span class="badge bg-info text-dark">@item.specialization.Name</span></td>
                         <td>@item.Phone</td>
                         <td class="fw-bold text-success">@item.ConsultationFee</td>
-                        <td></td>
+                        <td>@item.appointments.Count</td>
                         <td class="text-center">
                             <a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil"></i></a>
                             <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i></a>

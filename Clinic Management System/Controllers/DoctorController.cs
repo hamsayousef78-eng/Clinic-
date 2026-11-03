@@ -16,7 +16,7 @@ namespace Clinic_Management_System.Controllers
             }
             public IActionResult Index()
             {
-                var doctor = _context.doctors.Include(s => s.specialization).ToList();
+                var doctor = _context.doctors.Include(s => s.specialization).Include(s => s.appointments).ToList();
                 return View(doctor);
             }
             public IActionResult Create()

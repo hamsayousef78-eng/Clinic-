@@ -10,6 +10,6 @@
         public int SpecializationId { get; set; }//foreign key
         //Navigation
         public Specialization? specialization { get; set; } 
-        //public List<Appointment>? appointments { get; set; }
+        public List<Appointment>? appointments { get; set; }
     }
 }
