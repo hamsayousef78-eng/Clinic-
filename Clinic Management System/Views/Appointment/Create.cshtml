@@ -1,5 +1,102 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Clinic_Management_System.ViewModels.CreateAppoinmentViewModel
+
 @{
+    ViewData["Title"] = "Create";
 }
+
+
+    <div class="d-flex justify-content-between align-items-center pb-2 mb-4 border-bottom">
+        <h1 class="h3 fw-bold">تسجيل حجز كشف جديد</h1>
+        <a href="index.html" class="btn btn-outline-secondary"><i class="bi bi-arrow-right me-1"></i> عودة للاستقبال</a>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-primary text-white py-3">
+                    <h6 class="mb-0 fw-bold"><i class="bi bi-File-earmark-medical me-2"></i> بيانات الحجز </h6>
+                </div>
+                <div class="card-body p-4">
+                    <!-- Form Starts Here -->
+                <form asp-controller="Patient" asp-action="Index" method="post">
+                        <!-- Validation Summary Placeholder -->
+                        <div class="alert alert-danger d-none" role="alert">
+                            يرجى مراجعة الأخطاء التالية: عذراً، الطبيب لديه حجز آخر في نفس الموعد.
+                        </div>
+
+                        <div class="row g-3">
+                            <!-- اختيار المريض -->
+                            <div class="col-md-12">
+                                <div class="d-flex justify-content-between">
+                                <label asp-for="PatientId" class="form-label fw-semibold">اختر المريض <span class="text-danger">*</span></label>
+                                <a asp-controller="Patient" asp-action="Create" class="small text-decoration-none">+ تسجيل مريض جديد أولاً</a>
+                                </div>
+                            <select asp-for="PatientId" class="form-select" required>
+                                <option value="">--  ابحث واختر المريض --</option>
+                               @foreach (var patient in Model.patients)
+                                    {
+                                        <option value="@patient.Id">@patient.Name</option>
+                                    }
+                                </select>
+                                <span class="text-danger small"></span> <!-- asp-validation-for -->
+                            </div>
+
+                            <!-- اختيار التخصص (للفلترة) -->
+                            <div class="col-md-6">
+                            <label asp-for="SpecializationId" class="form-label fw-semibold">التخصص الطبي <span class="text-danger">*</span></label>
+                            <select id="SpecializationSelect" asp-for="SpecializationId" class="form-select" required>
+                                <option value="">--  اختر التخصص --</option>
+                                @foreach (var specialization in Model.specializations)
+                                {
+                                    <option value="@specialization.Id">@specialization.Name</option>
+                                }
+                                </select>
+                            </div>
+
+                            <!-- اختيار الطبيب -->
+                            <div class="col-md-6">
+                            <label asp-for="DoctorId" class="form-label fw-semibold">الطبيب المعالج <span class="text-danger">*</span></label>
+                            <select id="DoctorSelect" asp-for="DoctorId" class="form-select" required>
+                                    <option value="">-- اختر الطبيب --</option>
+                                @foreach (var doctor in Model.doctors)
+                                {
+                                    <option value="@doctor.Id">@doctor.Name</option>
+                                }
+                                </select>
+                                <span class="text-danger small"></span>
+                            </div>
+
+                            <!-- تاريخ ووقت الكشف -->
+                            <div class="col-md-6">
+                            <label asp-for="AppointmentDate" class="form-label fw-semibold">تاريخ الكشف <span class="text-danger">*</span></label>
+                            <input type="date" asp-for="AppointmentDate" class="form-control" required>
+                                <span class="text-danger small"></span>
+                            </div>
+                        <div class="col-md-6">
+                            <label asp-for="AppointmentDate" class="form-label fw-semibold">وقت الكشف <span class="text-danger">*</span></label>
+                            <input type="time" asp-for="AppointmentDate" class="form-control" required>
+                            <span class="text-danger small"></span>
+                        </div>
+                          
+
+                            <!-- ملاحظات مبدئية (الشكوى) -->
+                            <div class="col-12">
+                            <label asp-for="Notes" class="form-label fw-semibold">الشكوى المبدئية / ملاحظات الاستقبال</label>
+                            <textarea asp-for="Notes" class="form-control" rows="3" placeholder="مثال: المريض يعاني من ألم حاد منذ يومين..."></textarea>
+                            </div>
+
+                            <hr class="my-4">
+
+                            <div class="col-12 d-flex justify-content-end gap-2">
+                                <a href="index.html" class="btn btn-light border px-4">إلغاء</a>
+                                <button type="submit" class="btn btn-primary px-5 fw-bold">
+                                    <i class="bi bi-check2-circle me-1"></i> تأكيد الحجز
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+

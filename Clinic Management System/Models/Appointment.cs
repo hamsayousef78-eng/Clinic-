@@ -12,7 +12,7 @@
             Completed ,
             Cancelled
         }
-        public Status AppointmentStatus { get; set; }
+        public Status? AppointmentStatus { get; set; }
         public int DoctorId { get; set; }//foreign key
         //Navigation
         public Doctor? doctor { get; set; } 

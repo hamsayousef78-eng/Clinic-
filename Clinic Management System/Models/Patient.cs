@@ -8,10 +8,10 @@
         public int Age { get; set; }
         public enum Gender
         {
-            Male,
-            Female
+            ذكر,
+            انثي
         }
         public Gender PatientGender { get; set; }
-        public List<Appointment>? appointments { get; set; }
+        //public List<Appointment>? appointments { get; set; }
     }
 }

@@ -1,5 +1,144 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<Clinic_Management_System.Models.Patient>
 @{
+    ViewData["Title"] = "Index";
+}
+
+
+
+    <div class="d-flex justify-content-between align-items-center pb-2 mb-4 border-bottom">
+        <h1 class="h3 fw-bold">الملف الطبي للمريض </h1>
+    <a asp-controller="Appointment" asp-action="Create" class="btn btn-primary btn-sm"> حجز كشف جديد </a>
+    </div>
+     @foreach (var item in Model)
+    {
+<div class="card border-0 shadow-sm mb-4">
+
+    <div class="card-body">
+
+        <!-- البيانات الأساسية للمريض -->
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div class="d-flex align-items-center gap-3">
+
+                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center"
+                     style="width: 60px; height: 60px; font-size: 24px;">
+                    <i class="bi bi-person"></i>
+                </div>
+
+                <div>
+
+                        <h4 class="fw-bold mb-1">@item.Name</h4>
+
+                        <span class="text-muted me-3">
+                            <i class="bi bi-telephone me-1"></i>
+                            @item.Phone
+                        </span>
+
+                        <span class="text-muted me-3">
+                            <strong>السن:</strong> @item.Age
+                        </span>
+
+                        <span class="text-muted">
+                            <strong>النوع:</strong> @item.PatientGender
+                        </span>
+                  
+                </div>
+
+            </div>
+
+            <div class="d-flex align-items-center gap-2">
+
+                <span class="badge bg-info text-dark fs-6">
+                    إجمالي الزيارات: 2
+                </span>
+
+                <button class="btn btn-outline-primary btn-sm"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#patientAppointments_@item.Id"
+                        aria-expanded="false"
+                        aria-controls="patientAppointments_@item.Id">
+
+                    <i class="bi bi-calendar2-week me-1"></i>
+                    عرض السجل
+                    <i class="bi bi-chevron-down ms-1"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <hr />
+
+
+        <!-- سجل الكشوفات مخفي في البداية -->
+           <!-- <div class="collapse mt-3" id="patientAppointments_">
+
+            <div class="card border-0 bg-light">
+
+                <div class="card-header bg-white">
+                    <h5 class="fw-bold mb-0">
+                        سجل الكشوفات والحجوزات
+                    </h5>
+                </div>
+
+                <div class="card-body p-0">
+
+                    <div class="table-responsive">
+
+                        <table class="table table-hover align-middle mb-0">
+
+                            <thead class="table-light">
+                                <tr>
+                                    <th>التاريخ</th>
+                                    <th>الطبيب المعالج</th>
+                                    <th>التخصص</th>
+                                    <th>الحالة</th>
+                                    <th>التشخيص / الروشتة</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>2026-10-31</td>
+                                    <td class="fw-semibold">د. أحمد محمود</td>
+                                    <td>باطنة وجهاز هضمي</td>
+                                    <td>
+                                        <span class="badge bg-warning text-dark">
+                                            قيد الانتظار
+                                        </span>
+                                    </td>
+                                    <td class="text-muted">
+                                        لم يتم تسجيل التشخيص بعد
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>2026-09-15</td>
+                                    <td class="fw-semibold">د. سارة نبيل</td>
+                                    <td>طب وجراحة الأسنان</td>
+                                    <td>
+                                        <span class="badge bg-success">
+                                            تم الكشف
+                                        </span>
+                                    </td>
+                                    <td>
+                                        التهاب في اللثة - تم وصف مضاد حيوي
+                                        Amoxicillin 500mg كل 8 ساعات.
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>-->
+
+    </div>
+</div>
 }
