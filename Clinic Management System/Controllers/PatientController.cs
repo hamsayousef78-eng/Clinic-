@@ -14,7 +14,8 @@ namespace Clinic_Management_System.Controllers
         }
         public IActionResult Index()
         {
-            var patient = _context.patients.ToList();
+            
+            var patient = _context.patients.Include(p => p.appointments).ToList();
             return View(patient);
         }
         public IActionResult Create()
@@ -34,6 +35,21 @@ namespace Clinic_Management_System.Controllers
             _context.patients.Add(patient);
             _context.SaveChanges();
             return RedirectToAction("index");
+        }
+        public IActionResult Details(int id)
+        {
+            var patient = _context.patients.Include(x => x.appointments).ThenInclude(x => x.doctor)
+                             .ThenInclude(x => x.specialization).
+                             FirstOrDefault(d => d.Id == id); 
+
+            if (patient != null)
+            {
+                return View(patient);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
     }

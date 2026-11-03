@@ -12,6 +12,6 @@
             انثي
         }
         public Gender PatientGender { get; set; }
-        //public List<Appointment>? appointments { get; set; }
+        public List<Appointment>? appointments { get; set; }
     }
 }
